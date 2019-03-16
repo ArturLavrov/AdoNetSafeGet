@@ -9,83 +9,70 @@ namespace AdoNetSafeGet
     {
         public static Int16 SafeGetInt16(this IDataReader dataReader, string columnName, Int16 defaultValue = default(Int16))
         {
-            int columnIndex = dataReader.GetOrdinal(columnName);
-            if (!dataReader.IsDBNull(columnIndex))
-            {
-                return dataReader.GetInt16(columnIndex);
-            }
-            return defaultValue;
+            int columnIndex = GetColumnIndexByName(dataReader, columnName);
+            Func<Int16> func = () => dataReader.GetInt16(columnIndex);
+            return DataReaderFunctorExecutor<Int16>.ExecuteFunction(dataReader, columnIndex, func, defaultValue);
         }
 
         public static Int32 SafeGetInt32(this IDataReader dataReader, string columnName, Int32 defaultValue = default(Int32))
         {
-            int columnIndex = dataReader.GetOrdinal(columnName);
-            if (!dataReader.IsDBNull(columnIndex))
-            {
-                return dataReader.GetInt32(columnIndex);
-            }
-            return defaultValue;
+            int columnIndex = GetColumnIndexByName(dataReader, columnName);
+            Func<Int32> func = () => dataReader.GetInt32(columnIndex);
+            return DataReaderFunctorExecutor<Int32>.ExecuteFunction(dataReader, columnIndex, func, defaultValue);
         }
 
         public static Int64 SafeGetInt64(this IDataReader dataReader, string columnName, Int64 defaultValue = default(Int64))
         {
-            int columnIndex = dataReader.GetOrdinal(columnName);
-            if (!dataReader.IsDBNull(columnIndex))
-            {
-                return dataReader.GetInt64(columnIndex);
-            }
-            return defaultValue;
+            int columnIndex = GetColumnIndexByName(dataReader, columnName);
+            Func<Int64> func = () => dataReader.GetInt64(columnIndex);
+            return DataReaderFunctorExecutor<Int64>.ExecuteFunction(dataReader, columnIndex, func, defaultValue);
         }
 
         public static Decimal SafeGetDecimal(this IDataReader dataReader, string columnName, decimal defaultValue = default(Decimal))
         {
-            int columnIndex = dataReader.GetOrdinal(columnName);
-            if (!dataReader.IsDBNull(columnIndex))
-            {
-                return dataReader.GetDecimal(columnIndex);
-            }
-            return defaultValue;
+            int columnIndex = GetColumnIndexByName(dataReader, columnName);
+            Func<Decimal> func = () => dataReader.GetDecimal(columnIndex);
+            return DataReaderFunctorExecutor<Decimal>.ExecuteFunction(dataReader, columnIndex, func, defaultValue);
         }
 
-        public static char SafeGetChar(this IDataReader dataReader, string columnName, char defaultValue = default(Char))
+        public static Char SafeGetChar(this IDataReader dataReader, string columnName, char defaultValue = default(Char))
         {
-            int columnIndex = dataReader.GetOrdinal(columnName);
-            if (!dataReader.IsDBNull(columnIndex))
-            {
-                return dataReader.GetChar(columnIndex);
-            }
-            return defaultValue;
+            int columnIndex = GetColumnIndexByName(dataReader, columnName);
+            Func<Char> func = () => dataReader.GetChar(columnIndex);
+            return DataReaderFunctorExecutor<Char>.ExecuteFunction(dataReader, columnIndex, func, defaultValue);
         }
 
-        public static byte SafeGetByte(this IDataReader dataReader, string columnName, byte defaultValue = default(Byte))
+        public static Byte SafeGetByte(this IDataReader dataReader, string columnName, byte defaultValue = default(Byte))
         {
-            int columnIndex = dataReader.GetOrdinal(columnName);
-            if (!dataReader.IsDBNull(columnIndex))
-            {
-                return dataReader.GetByte(columnIndex);
-            }
-            return defaultValue;
+            int columnIndex = GetColumnIndexByName(dataReader, columnName);
+            Func<Byte> func = () => dataReader.GetByte(columnIndex);
+            return DataReaderFunctorExecutor<Byte>.ExecuteFunction(dataReader, columnIndex, func, defaultValue);
         }
 
-        public static string SafeGetString(this IDataReader dataReader, string columnName, string defaultValue = default(String))
+        public static String SafeGetString(this IDataReader dataReader, string columnName, string defaultValue = default(String))
         {
-            int index = dataReader.GetOrdinal(columnName);
-            if (!dataReader.IsDBNull(index))
-            {
-                return dataReader.GetString(index);
-            }
-            return defaultValue;
+            int columnIndex = GetColumnIndexByName(dataReader, columnName);
+            Func<String> func = () => dataReader.GetString(columnIndex);
+            return DataReaderFunctorExecutor<String>.ExecuteFunction(dataReader, columnIndex, func, defaultValue);
         }
 
-        public static string SafeGetDateTimeAsFormatedString(this IDataReader datareader, string columnName, string defaultValue = default(string), string dateTimeFormat = "")
+        public static DateTime SafeGetDateTime(this IDataReader dataReader, string columnName, DateTime defaultValue = default(DateTime))
         {
+            int columnIndex = GetColumnIndexByName(dataReader, columnName);
+            Func<DateTime> func = () => dataReader.GetDateTime(columnIndex);
+            return DataReaderFunctorExecutor<DateTime>.ExecuteFunction(dataReader, columnIndex, func, defaultValue);
+        }
 
-            int index = datareader.GetOrdinal(columnName);
-            if (!datareader.IsDBNull(index))
-            {
-                return datareader.GetDateTime(index).ToString(dateTimeFormat);
-            }
-            return defaultValue;
+        public static String SafeGetDateTimeAsFormatedString(this IDataReader dataReader, string columnName, string defaultValue = default(string), string dateTimeFormat = "")
+        {
+            int columnIndex = GetColumnIndexByName(dataReader, columnName);
+            Func<String> func = () => dataReader.GetDateTime(columnIndex).ToString(dateTimeFormat);
+            return DataReaderFunctorExecutor<String>.ExecuteFunction(dataReader, columnIndex, func, defaultValue);
+        }
+
+        private static int GetColumnIndexByName(IDataReader dataReader, string columnName)
+        {
+            return dataReader.GetOrdinal(columnName);
         }
     }
 }
