@@ -128,8 +128,8 @@ namespace AdoNetSafeGet.Tests
         [Fact]
         public void SafeGetByte_DataReaderWithByteValue_ReturnByte()
         {
-            byte expectedResult = 0x00C9;
-            byte realResult = default(byte);
+            Byte expectedResult = 0x00C9;
+            Byte realResult = default(Byte);
 
             var mockDataReader = _mockDataReader;
 
@@ -145,8 +145,8 @@ namespace AdoNetSafeGet.Tests
         [Fact]
         public void SafeGetString_DataReaderWithStringValue_ReturnString()
         {
-            string expectedResult = "s";
-            String realResult = default(string);
+            String expectedResult = "s";
+            String realResult = default(String);
 
             var mockDataReader = _mockDataReader;
 
@@ -175,9 +175,9 @@ namespace AdoNetSafeGet.Tests
         }
 
         [Fact]
-        public void SafeGetDateTimeAsFormatedString_DataReaderWithDateTimeValue_ReturnInt16()
+        public void SafeGetDateTimeAsFormatedString_DataReaderWithDateTimeValue_ReturnFormatedDateTimeString()
         {
-            string dateTimeFormat = "yyyyMMddHHmmss";
+            String dateTimeFormat = "yyyyMMddHHmmss";
             String expectedResult = new DateTime(2017, 03, 20).ToString(dateTimeFormat);
             String realResult = default(string);
 
