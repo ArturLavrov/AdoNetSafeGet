@@ -191,6 +191,19 @@ namespace AdoNetSafeGet.Tests
             Assert.Equal(expectedResult, realResult);
         }
 
+        [Fact]
+        public void GetStringColumnIndexByName_DataReaderWithStringColumn_ReturnIndex()
+        {
+            int expectedResult = 6;
+            int realResult = default(int);
+           
+            var mockDataReader = _mockDataReader;
+
+            realResult = mockDataReader.GetOrdinal("StringColumn");
+
+            Assert.Equal(expectedResult, realResult);
+        }
+
         public void Dispose()
         {
             _mockDataReader = null;
