@@ -19,4 +19,9 @@ steps:
     command: build
     projects: 'src/AdoNetSafeGet/AdoNetSafeGet.csproj'
     arguments: '--configuration Release' # Update this to match your need
-
+- task: DotNetCoreCLI@2
+  displayName: Run Unit tests
+  inputs:
+    command: test
+    projects: 'src/AdoNetSafeGet.Tests/AdoNetSafeGet.Tests.csproj'
+    arguments: '--configuration $(buildConfiguration)'
