@@ -96,7 +96,7 @@ namespace AdoNetSafeGet
         //TODO: move to separate class method ChekArgumentAccuracy
         private static void ChekArgumentAccuracy(string columnName)
         {
-            if (String.IsNullOrEmpty(columnName) && String.IsNullOrWhiteSpace(columnName))
+            if (String.IsNullOrEmpty(columnName) || String.IsNullOrWhiteSpace(columnName))
             {
                 throw new ArgumentException(String.Format(Constants.ArgumentExceptionMessageTemplate, columnName));
             }

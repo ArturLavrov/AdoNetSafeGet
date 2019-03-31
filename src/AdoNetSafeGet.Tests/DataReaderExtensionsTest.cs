@@ -39,9 +39,11 @@ namespace AdoNetSafeGet.Tests
         }
 
         [Fact]
-        public void CallSafeGetMethodWithNullColumnArgument_DataReartWithInt32Value_ThrowArgumentException()
+        public void CallSafeGetMethodWithInvalidArgumentsColumnArgument_DataReartWithInt32Value_ThrowArgumentException()
         {
-            Assert.Throws<ArgumentException>(() => _mockDataReader.SafeGetInt16(""));
+            Assert.Throws<ArgumentException>(() => _mockDataReader.SafeGetInt32(""));
+            Assert.Throws<ArgumentException>(() => _mockDataReader.SafeGetInt32(" "));
+            Assert.Throws<ArgumentException>(() => _mockDataReader.SafeGetInt32(null));
         }
 
         [Fact]
