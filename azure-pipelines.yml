@@ -24,4 +24,4 @@ steps:
   inputs:
     command: test
     projects: 'src/AdoNetSafeGet.Tests/AdoNetSafeGet.Tests.csproj'
-    arguments: '--configuration $(buildConfiguration) --collect "Code coverage"''
+    arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
