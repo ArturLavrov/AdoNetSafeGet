@@ -39,6 +39,12 @@ namespace AdoNetSafeGet.Tests
         }
 
         [Fact]
+        public void CallSafeGetMethodWithNullColumnArgument_DataReartWithInt32Value_ThrowArgumentException()
+        {
+            Assert.Throws<ArgumentException>(() => _mockDataReader.SafeGetInt16(""));
+        }
+
+        [Fact]
         public void SafeGetInt16_DataReaderWithInt16Value_ReturnInt16()
         {
             //Arrage
