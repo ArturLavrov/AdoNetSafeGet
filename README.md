@@ -8,6 +8,6 @@ Set of extensions method for more easier and clean work with AdoNet IDataReader 
 ```c#
     while (mockDataReader.Read())
     {
-        realResult = dataReader..SafeGetString("StringColumn", "default value");
+        realResult = dataReader.SafeGetString("StringColumn", "default value");
     }
 ```
