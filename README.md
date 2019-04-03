@@ -42,4 +42,4 @@ while(dataReader.Read){
 }
 ```
 ## NB!
-If you wouldn't' specify a default value, the type default value will be returned.
+If you wouldn't specify a default value, the type default value will be returned.
