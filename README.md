@@ -19,7 +19,7 @@ while(dataReader.Read){
     string city = dataReader.GetString(cityColumnIndex);
 }
 ```
-  - efficient and way to handle DBNull values.
+  - efficient and clear way to handle DBNull values.
 ```C#
 while(dataReader.Read){
     string city = dataReader.SafeGetString("Name");
