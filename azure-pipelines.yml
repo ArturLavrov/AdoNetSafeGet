@@ -31,6 +31,7 @@ steps:
     arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
 
 - task: NuGetCommand@2
+  displayName: Build Artifact
   inputs:
     command: pack
     versioningScheme: byBuildNumber
