@@ -30,7 +30,7 @@ steps:
     projects: 'src/AdoNetSafeGet.Tests/AdoNetSafeGet.Tests.csproj'
     arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
 
-- task: BuildArtifact@2
+- task: NuGetCommand@2
   inputs:
     command: pack
     versioningScheme: byBuildNumber
