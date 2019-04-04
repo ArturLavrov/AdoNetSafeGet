@@ -11,6 +11,9 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
+  Major: '0'
+  Minor: '9'
+  Patch: '0'
 
 steps:
 - task: DotNetCoreCLI@2
@@ -19,9 +22,18 @@ steps:
     command: build
     projects: 'src/AdoNetSafeGet/AdoNetSafeGet.csproj'
     arguments: '--configuration Release' # Update this to match your need
+
 - task: DotNetCoreCLI@2
   displayName: Run Unit tests
   inputs:
     command: test
     projects: 'src/AdoNetSafeGet.Tests/AdoNetSafeGet.Tests.csproj'
     arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
+
+- task: BuildArtifact
+  inputs:
+    command: pack
+    versioningScheme: byBuildNumber
+    majorVersion: '$(Major)'
+    minorVersion: '$(Minor)'
+    patchVersion: '$(Patch)'
