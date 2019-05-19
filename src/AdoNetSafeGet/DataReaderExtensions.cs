@@ -43,6 +43,16 @@ namespace AdoNetSafeGet
             return DataReaderFunctorExecutor<Decimal>.ExecuteFunction(dataReader, columnIndex, func, defaultValue);
         }
 
+        public static Guid SafeGetGuid(this IDataReader dataReader, string columnName, Guid defaultValue = default(Guid))
+        {
+            ChekArgumentAccuracy(columnName);
+
+            int columnIndex = GetColumnIndexByName(dataReader, columnName);
+            Func<Guid> func = () => dataReader.GetGuid(columnIndex);
+            return DataReaderFunctorExecutor<Guid>.ExecuteFunction(dataReader, columnIndex, func, defaultValue);
+        }
+
+
         public static Char SafeGetChar(this IDataReader dataReader, string columnName, char defaultValue = default(Char))
         {
             ChekArgumentAccuracy(columnName);
@@ -87,6 +97,7 @@ namespace AdoNetSafeGet
             Func<String> func = () => dataReader.GetDateTime(columnIndex).ToString(dateTimeFormat);
             return DataReaderFunctorExecutor<String>.ExecuteFunction(dataReader, columnIndex, func, defaultValue);
         }
+
 
         private static int GetColumnIndexByName(IDataReader dataReader, string columnName)
         {

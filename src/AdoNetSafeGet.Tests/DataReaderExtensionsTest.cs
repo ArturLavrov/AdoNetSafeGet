@@ -33,6 +33,8 @@ namespace AdoNetSafeGet.Tests
             mockdataReader.Setup(m => m.GetString(6)).Returns("s");
             mockdataReader.Setup(m => m.GetOrdinal("DateTimeColumn")).Returns(7);
             mockdataReader.Setup(m => m.GetDateTime(7)).Returns(new DateTime(2017, 03, 20));
+            mockdataReader.Setup(m => m.GetOrdinal("GuidColumn")).Returns(8);
+            mockdataReader.Setup(m => m.GetGuid(8)).Returns(new Guid("a2934fa2-6f7e-4ac9-8210-681814ac86c4"));
             mockdataReader.SetupSequence(m => m.Read())
                 .Returns(true);
             return mockdataReader;
@@ -198,6 +200,23 @@ namespace AdoNetSafeGet.Tests
 
             Assert.Equal(expectedResult, realResult);
         }
+
+        [Fact]
+        public void SafeGetGuid_DataReaderWithGuidValue_ReturnGuid()
+        {
+            Guid expectedGuid = new Guid("a2934fa2-6f7e-4ac9-8210-681814ac86c4");
+            Guid realResult = default(Guid);
+
+            var mockDataReader = _mockDataReader;
+
+            while (mockDataReader.Read())
+            {
+                realResult = mockDataReader.SafeGetGuid("GuidColumn");
+            }
+
+            Assert.Equal(expectedGuid, realResult);
+        }
+
 
         [Fact]
         public void GetStringColumnIndexByName_DataReaderWithStringColumn_ReturnIndex()
