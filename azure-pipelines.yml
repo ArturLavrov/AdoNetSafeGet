@@ -9,12 +9,6 @@ trigger:
 pool:
   vmImage: 'Ubuntu-16.04'
 
-variables:
-  buildConfiguration: 'Release'
-  Major: '0'
-  Minor: '9'
-  Patch: '0'
-
 steps:
 - task: DotNetCoreCLI@2
   displayName: Build
@@ -29,12 +23,3 @@ steps:
     command: test
     projects: 'src/AdoNetSafeGet.Tests/AdoNetSafeGet.Tests.csproj'
     arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
-
-- task: NuGetCommand@2
-  displayName: Build Artifact
-  inputs:
-    command: pack
-    versioningScheme: byBuildNumber
-    majorVersion: '$(Major)'
-    minorVersion: '$(Minor)'
-    patchVersion: '$(Patch)'
